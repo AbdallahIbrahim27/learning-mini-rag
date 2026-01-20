@@ -1,5 +1,6 @@
 from .BaseController import BaseController
 from fastapi import UploadFile
+from models import ResponseSignle
 
 class DataController(BaseController):
     
@@ -10,9 +11,10 @@ class DataController(BaseController):
     def validate_uploaded_file(self, file: UploadFile):
         
         if file.content_type not in self.app_settings.FILE_ALLOWED_TYPES:
-            return False, f"File type {file.content_type} is not allowed."
+            return False, ResponseSignle.FILE_TYPE_IS_NOT_SUPPORTED.value
         
         if file.size > self.app_settings.FILE_MAX_SIZE * self.size_scale:
-            return False, f"File size exceeds the maximum limit of {self.app_settings.FILE_MAX_SIZE} MB."
+            return False, ResponseSignle.FILE_SIZE_EXCEEDED.value
         
-        return True, "File is valid."
+        return True, ResponseSignle.FILE_IS_VALID.value
+    
