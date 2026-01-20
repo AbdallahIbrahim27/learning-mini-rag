@@ -1,6 +1,6 @@
 from enum import Enum
 
-class ResponseSignle(Enum):
+class ResponseSignal(Enum):
     
     FILE_IS_VALID = "FILE_IS_VALID"
     FILE_TYPE_IS_NOT_SUPPORTED = "FILE_TYPE_IS_NOT_SUPPORTED"

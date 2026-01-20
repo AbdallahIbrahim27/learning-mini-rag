@@ -1,1 +1,1 @@
-from .enums.ResponseEnum import ResponseSignle
+from .enums.ResponseEnum import ResponseSignal
