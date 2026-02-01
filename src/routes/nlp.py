@@ -190,3 +190,4 @@ async def answer_rag(request: Request, project_id: str, search_request: SearchRe
             "chat_history": chat_history
         }
     )
+    
