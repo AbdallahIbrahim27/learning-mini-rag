@@ -41,7 +41,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
         case_sensitive=False,
-        populate_by_name=True
+        populate_by_name=True,
+        extra="ignore"  # Add this line
     )
 
 def get_settings():
