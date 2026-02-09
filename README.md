@@ -95,32 +95,43 @@ Retrieval-Augmented Generation enhances LLM responses by:
 │              (Controllers - Orchestration)                       │
 └─────┬──────────────────┬──────────────────┬─────────────────────┘
       │                  │                  │
-┌─────▼─────┐   ┌────────▼────────┐   ┌────▼──────────────────────┐
-│   Data    │   │   Persistence   │   │   External Services       │
-│   Layer   │   │     Layer       │   │                           │
-│           │   │                 │   │  ┌─────────────────────┐  │
-│  Models   │   │    MongoDB      │   │  │   LLM Providers     │  │
-│  (CRUD)   │   │  (Documents)    │   │  │  - OpenAI           │  │
-│           │   │                 │   │  │  - Cohere           │  │
-└───────────┘   └─────────────────┘   │  └─────────────────────┘  │
-                                      │                           │
-                                      │  ┌─────────────────────┐  │
-                                      │  │  Vector Database    │  │
-                                      │  │  - Qdrant           │  │
-                                      │  └─────────────────────┘  │
-                                      └───────────────────────────┘
+┌─────▼─────┐   ┌────────▼────────┐   ┌────▼────────────────────────────────┐
+│   Data    │   │   Persistence   │   │          External Services            │
+│   Layer   │   │     Layer       │   │                                        │
+│           │   │                 │   │  ┌─────────────────────────────────┐ │
+│  Models   │   │   PostgreSQL    │   │  │        LLM Providers             │ │
+│  (CRUD)   │   │  (Documents &   │   │  │  - OpenAI (API)                  │ │
+│           │   │   Metadata)     │   │  │  - Cohere (API)                  │ │
+│           │   │                 │   │  │  - Gemma (Ollama)                │ │
+│           │   │                 │   │  │  - Qwen (Ollama)                 │ │
+└───────────┘   └─────────────────┘   │  └─────────────────────────────────┘ │
+                                      │                                        │
+                                      │  ┌─────────────────────────────────┐ │
+                                      │  │        Vector Database           │ │
+                                      │  │  - PGVector (PostgreSQL)         │ │
+                                      │  └─────────────────────────────────┘ │
+                                      │                                        │
+                                      │  ┌─────────────────────────────────┐ │
+                                      │  │     Ollama Runtime Server        │ │
+                                      │  │  - Google Colab (T4 GPU)         │ │
+                                      │  │  - Exposed via ngrok             │ │
+                                      │  └─────────────────────────────────┘ │
+                                      └────────────────────────────────────────┘
 ```
 
 ### Component Overview
 
-| Component | Responsibility | Technology |
-|-----------|---------------|------------|
-| **API Layer** | HTTP request handling, validation | FastAPI, Pydantic |
-| **Controllers** | Business logic orchestration | Python |
-| **Models** | Database CRUD operations | PyMongo |
-| **LLM Store** | AI provider integration | OpenAI SDK, Cohere SDK |
-| **Vector Store** | Semantic search operations | Qdrant Client |
-| **Helpers** | Configuration, utilities | Pydantic Settings |
+| Component         | Responsibility                     | Technology                     |
+| ----------------- | ---------------------------------- | ------------------------------ |
+| **API Layer**     | HTTP request handling, validation  | FastAPI, Pydantic              |
+| **Controllers**   | Business logic orchestration       | Python                         |
+| **Models**        | Database CRUD operations           | SQLAlchemy, Psycopg            |
+| **LLM Store**     | LLM provider integration & routing | OpenAI SDK, Cohere SDK, Ollama |
+| **Vector Store**  | Semantic search operations         | PGVector                       |
+| **Ollama Server** | Local LLM inference runtime        | Ollama (Gemma, Qwen)           |
+| **GPU Runtime**   | Accelerated model inference        | Google Colab (T4 GPU)          |
+| **Tunneling**     | Secure public endpoint exposure    | ngrok                          |
+| **Helpers**       | Configuration, utilities           | Pydantic Settings              |
 
 ---
 
