@@ -2,211 +2,54 @@
 
 This is a minimal implementation of the RAG model for question answering.
 
-## 📁 Project Structure
+## The Course
 
-### Folder Organization
+This is an educational project where all of the codes where explained (step by step) via a set of `Arabic` youtube videos. Please check the list:
 
-```
-learning-mini-rag/
-├── src/
-│   ├── routes/              # API Endpoints Layer
-│   ├── controllers/         # Business Logic Layer
-│   ├── models/              # Database Layer
-│   ├── stores/              # External Service Abstractions
-│   │   ├── llm/            # LLM Provider Integration
-│   │   └── vectordb/       # Vector Database Integration
-│   ├── helpers/            # Utility Functions
-│   └── assets/             # File & Database Storage
-├── docker/                 # Docker Configuration
-└── .vscode/                # Editor Settings
-```
+| # | Title                                    | Link                                                                                                 | Codes                                              |
+|---|------------------------------------------|------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| 1 | About the Course ماذا ولمـــاذا          | [Video](https://www.youtube.com/watch?v=Vv6e2Rb1Q6w&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj)         | NA                                                 |
+| 2 | What will we build ماذا سنبنى في المشروع | [Video](https://www.youtube.com/watch?v=_l5S5CdxE-Q&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=2) | NA                                                 |
+| 3 | Setup your tools الأدوات الأساسية        | [Video](https://www.youtube.com/watch?v=VSFbkFRAT4w&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=3) | NA                                                 |
+| 4 | Project Architecture                     | [Video](https://www.youtube.com/watch?v=Ei_nBwBbFUQ&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=4) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-001) |
+| 5 | Welcome to FastAPI                       | [Video](https://www.youtube.com/watch?v=cpOuCdzN_Mo&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=5) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-002) |
+| 6 | Nested Routes + Env Values               | [Video](https://www.youtube.com/watch?v=CrR2Bz2Y7Hw&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=6) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-003) |
+| 7 | Uploading a File                         | [Video](https://www.youtube.com/watch?v=5alMKCbFqWs&list=PLvLvlVqNQGHCUR2p0b8a0QpVjDUg50wQj&index=7) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-004) |
+| 8 | File Processing                         | [Video](https://www.youtube.com/watch?v=gQgr2iwtSBw) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-005) |
+| 9 | Docker - MongoDB - Motor                         | [Video](https://www.youtube.com/watch?v=2NOKWm0xJAk) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-006) |
+| 10 | Mongo Schemes and Models                        | [Video](https://www.youtube.com/watch?v=zgcnnMJXXV8) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-007) |
+| 11 | Mongo Indexing                        | [Video](https://www.youtube.com/watch?v=iO8FAmUVcjE) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
+| 12 | Data Pipeline Enhancements                        | [Video](https://www.youtube.com/watch?v=4x1DuezZBDU) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
+| 13 | Checkpoint-1                        | [Video](https://www.youtube.com/watch?v=7xIsZkCisPk) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
+| 14 | LLM Factory                        | [Video](https://www.youtube.com/watch?v=5TKRIFtIQAY) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-008) |
+| 15 | Vector DB Factory                        | [Video](https://www.youtube.com/watch?v=JtS9UkvF_10) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-009) |
+| 16 | Semantic Search                       | [Video](https://www.youtube.com/watch?v=V3swQKokJW8) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-010) |
+| 17 | Augmented Answers                       | [Video](https://www.youtube.com/watch?v=1Wx8BoM5pLU) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-011) |
+| 18 | Checkpoint-1 + Fix Issues                       | [Video](https://youtu.be/6zG4Idxldvg) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-012) |
+| 19 | Ollama Local LLM Server                       | [Video](https://youtu.be/-epZ1hAAtrs) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-012) |
+| 20 | From Mongo to Postgres + SQLAlchemy & Alembic                       | [Video](https://www.youtube.com/watch?v=BVOq7Ek2Up0) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-013) |
+| 21 | The way to PgVector                       | [Video](https://www.youtube.com/watch?v=g99yq5zlYAE) | [branch](https://github.com/bakrianoo/mini-rag/tree/tut-014) |
 
-### Detailed Folder Breakdown
-
-#### **1. 📡 `routes/` - API Endpoints Layer**
-Defines all HTTP endpoints that users interact with.
-
-- `base.py` - Basic endpoints (welcome/health check)
-- `data.py` - File upload & processing endpoints
-- `nlp.py` - NLP operations (indexing, search, RAG answers)
-- `schemes/` - Request/response validation models
-
-**Example:** `POST /api/v1/data/upload/{project_id}` → handled by `routes/data.py`
-
----
-
-#### **2. 🎮 `controllers/` - Business Logic Layer**
-Contains core business logic and orchestrates operations between API and database.
-
-- `BaseController.py` - Shared utilities for all controllers
-- `ProjectController.py` - Manages project folder creation
-- `DataController.py` - File validation and path generation
-- `ProcessController.py` - Document loading and chunking (uses LangChain)
-- `NLPController.py` - **RAG orchestration** (embedding, indexing, search, answer generation)
-
-**Example:** `NLPController` takes a question → retrieves relevant chunks → builds prompt → calls LLM
-
----
-
-#### **3. 💾 `models/` - Database Layer**
-Handles all database operations (CRUD) and schema definitions.
-
-**Structure:**
-```
-models/
-├── ProjectModel.py       # Project CRUD operations
-├── AssetModel.py         # File asset CRUD operations  
-├── ChunkModel.py         # Document chunks CRUD operations
-├── db_schemes/           # Data schemas (structure definitions)
-│   ├── project.py
-│   ├── asset.py
-│   └── data_chunk.py
-└── enums/                # Enumerations (constants)
-```
-
-**Example:** `ChunkModel.insert_many_chunks()` saves text chunks to MongoDB in batches
-
----
-
-#### **4. 🤖 `stores/llm/` - LLM Provider Abstraction**
-Manages LLM integrations (OpenAI, Cohere) with a unified interface.
-
-**Structure:**
-```
-stores/llm/
-├── LLMInterface.py              # Abstract interface (contract)
-├── LLMProviderFactory.py        # Creates provider instances
-├── LLMEnums.py                  # Provider types, roles
-├── providers/
-│   ├── OpenAIProvider.py        # OpenAI implementation
-│   └── CoHereProvider.py        # Cohere implementation
-└── templates/                   # Prompt templates
-    ├── template_parser.py       # Multi-language template loader
-    └── locales/
-        ├── en/rag.py           # English RAG prompts
-        └── ar/rag.py           # Arabic RAG prompts
-```
-
-**Example:** Factory creates OpenAI client → generates embeddings → creates chat completion
-
----
-
-#### **5. 🗄️ `stores/vectordb/` - Vector Database Abstraction**
-Manages vector database operations (currently Qdrant).
-
-**Structure:**
-```
-stores/vectordb/
-├── VectorDBInterface.py         # Abstract interface
-├── VectorDBProviderFactory.py   # Creates DB client
-├── VectorDBEnums.py             # DB types, distance metrics
-└── providers/
-    └── QdrantDBProvider.py      # Qdrant implementation
-```
-
-**Example:** Stores chunk embeddings → Performs semantic search by cosine similarity
-
----
-
-#### **6. ⚙️ `helpers/` - Utility Functions**
-Provides shared helper functions used across the application.
-
-- `config.py` - Loads `.env` settings into Pydantic model
-
-**Example:** `get_settings()` returns all configuration (API keys, database URLs, model IDs)
-
----
-
-#### **7. 📦 `assets/` - File Storage**
-Stores uploaded files and database files.
-
-**Structure:**
-```
-assets/
-├── files/                  # Uploaded documents organized by project
-│   └── {project_id}/      # Each project has its own folder
-├── database/              # Vector database storage (Qdrant)
-│   └── qdrant_db/
-└── *.postman_collection.json  # API testing collections
-```
-
-**Example:** Uploaded file saved as `assets/files/1/abc123_resume.pdf`
-
----
-
-### 🔄 RAG Pipeline Flow
-
-```
-1. Upload        → POST /data/upload/{project_id}
-                   (User uploads PDF/TXT)
-                   ↓
-2. Process       → POST /data/process/{project_id}
-                   (File chunked using LangChain)
-                   ↓
-3. Embed & Index → POST /nlp/index/push/{project_id}
-                   (Chunks embedded and stored in Qdrant)
-                   ↓
-4. Query         → POST /nlp/index/answer/{project_id}
-                   (User asks a question)
-                   ↓
-5. Retrieve      → Semantic search finds relevant chunks
-                   ↓
-6. Augment       → Retrieved chunks added to prompt template
-                   ↓
-7. Generate      → LLM generates answer with context
-```
-
----
-
-### 📊 How Components Work Together
-
-```
-User Request (API)
-    ↓
-[routes/]          ← Receives HTTP request
-    ↓
-[controllers/]     ← Processes business logic
-    ↓
-[models/]          ← Reads/writes to MongoDB
-[stores/llm/]      ← Calls OpenAI/Cohere APIs
-[stores/vectordb/] ← Searches Qdrant vector DB
-    ↓
-[helpers/]         ← Provides config & utilities
-    ↓
-Response sent back to user
-```
-
----
-
-### 🎯 Responsibility Summary
-
-| Folder | Responsibility | Example |
-|--------|---------------|---------|
-| **routes/** | API endpoints (HTTP layer) | `POST /upload` |
-| **controllers/** | Business logic (orchestration) | Validate file → chunk → embed |
-| **models/** | Database operations (data layer) | Save 100 chunks to MongoDB |
-| **stores/llm/** | AI provider integration | Call OpenAI to get embeddings |
-| **stores/vectordb/** | Vector database operations | Search Qdrant for similar docs |
-| **helpers/** | Configuration & utilities | Load `.env` settings |
-| **assets/** | File & database storage | Store uploaded PDFs |
-
----
 
 ## Requirements
 
-* Python 3.8 or later
+- Python 3.10
+
+#### Install Dependencies
+
+```bash
+sudo apt update
+sudo apt install libpq-dev gcc python3-dev
+```
 
 #### Install Python using MiniConda
 
-1. Download and install MiniConda from [here](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)
-2. Create a new environment using the following command:
-
+1) Download and install MiniConda from [here](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)
+2) Create a new environment using the following command:
 ```bash
-$ conda create -n mini-rag python=3.8
+$ conda create -n mini-rag python=3.10
 ```
-
-3. Activate the environment:
-
+3) Activate the environment:
 ```bash
 $ conda activate mini-rag
 ```
@@ -216,6 +59,10 @@ $ conda activate mini-rag
 ```bash
 export PS1="\[\033[01;32m\]\u@\h:\w\n\[\033[00m\]\$ "
 ```
+
+### (Optional) Run Ollama Local LLM Server using Colab + Ngrok
+
+- Check the [notebook](https://colab.research.google.com/drive/1KNi3-9KtP-k-93T3wRcmRe37mRmGhL9p?usp=sharing) + [Video](https://youtu.be/-epZ1hAAtrs)
 
 ## Installation
 
@@ -231,6 +78,12 @@ $ pip install -r requirements.txt
 $ cp .env.example .env
 ```
 
+### Run Alembic Migration
+
+```bash
+$ alembic upgrade head
+```
+
 Set your environment variables in the `.env` file. Like `OPENAI_API_KEY` value.
 
 ## Run Docker Compose Services
@@ -240,7 +93,9 @@ $ cd docker
 $ cp .env.example .env
 ```
 
-* update `.env` with your credentials
+- update `.env` with your credentials
+
+
 
 ```bash
 $ cd docker
@@ -253,25 +108,6 @@ $ sudo docker compose up -d
 $ uvicorn main:app --reload --host 0.0.0.0 --port 5000
 ```
 
-## API Endpoints
-
-### Base Endpoints
-- `GET /api/v1/` - Welcome endpoint
-
-### Data Endpoints
-- `POST /api/v1/data/upload/{project_id}` - Upload files (PDF/TXT)
-- `POST /api/v1/data/process/{project_id}` - Process files into chunks
-
-### NLP Endpoints
-- `POST /api/v1/nlp/index/push/{project_id}` - Index chunks into vector DB
-- `GET /api/v1/nlp/index/info/{project_id}` - Get collection info
-- `POST /api/v1/nlp/index/search/{project_id}` - Semantic search
-- `POST /api/v1/nlp/index/answer/{project_id}` - RAG question answering
-
 ## POSTMAN Collection
 
-Download the POSTMAN collection from `/assets/mini-rag-app.postman_collection.json`
-
-## About
-
-Learning mini-rag course - A step-by-step educational project to build a production-ready RAG application.
+Download the POSTMAN collection from [/assets/mini-rag-app.postman_collection.json](/assets/mini-rag-app.postman_collection.json)
